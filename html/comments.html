@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+$(document).ready(function(){
+$("#sub").click(function(){
+		var myobj = {Name:$("#Name").val(), Comment:$("#Comment").val()}
+;
+		console.log($("#Name").val());
+		console.log(myobj);
+		var jobj = JSON.stringify(myobj);
+		$("#json").text(jobj);
+
+
+	var url = "http://52.11.51.61/comments";
+	$.post(url, jobj, function(data, textStatus){
+		$("#done").text(textStatus);
+	});
+
+		});
+
+});
+
+
+function show(){
+	var url = "/comments";
+
+
+	$.getJSON(url, function(data){
+	  var everything;
+	  everything = "<ul>";
+	  $.each(data, function(i, item){
+		everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment;
+	  });
+	  everything += "</ul>";
+	  $("#currentComments").html(everything);
+	})
+
+                .done(function() { console.log('getJSON request succeeded!'); })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log('getJSON request failed! ' + textStatus);
+                    console.log("incoming "+jqXHR.responseText);
+                })
+                .always(function() { console.log('getJSON request ended!');
+                })
+                .complete(function() { console.log("complete"); });
+};
+</script>
+</head>
+<body>
+
+<form id="commentForm" action="">
+Name: <input type="text" id="Name" value="Mickey"><br>
+Comment: <input type="text" id="Comment" value="Hello"><br>
+</form>
+
+<button id="sub">Submit Comment</button>
+<button id="show" onclick="show()">Show Comments</button>
+<div id="json"></div>
+<div id="done"></div>
+<div id="currentComments"></div>
+
+</body>
+</html>
