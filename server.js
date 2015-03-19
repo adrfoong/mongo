@@ -41,8 +41,8 @@ http.createServer(function (req, res) {
                     if(err) throw err;
                     comments.find(function(err, items){
                         items.toArray(function(err, itemArr){
-                           	    console.log("Document Array: ");
-		    console.log(itemArr);
+                //           	    console.log("Document Array: ");
+		  //  console.log(itemArr);
 
                             res.writeHead(200);
                             res.end(JSON.stringify(itemArr));
@@ -56,7 +56,7 @@ http.createServer(function (req, res) {
     }
 
 
-    if(urlObj.pathname.indexOf("getcity") != -1){
+    else if(urlObj.pathname.indexOf("getcity") != -1){
         var myRe = new RegExp("^"+urlObj.query["q"]);
         console.log(myRe);
 
