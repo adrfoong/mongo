@@ -1,0 +1,17 @@
+
+<div class="page-header"> 
+  <h1>Weather News</h1>
+</div>
+
+  <form ng-submit="addPost()" style = "margin-top30px;">
+    <input type="text" ng-model="formContent"></input>
+    <button type="submit">Post</button>
+  </form>
+  <div>
+    {{test}}
+  </div>
+  <div ng-repeat="post in posts | orderBy: '-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+    {{post.title}} - upvotes: {{post.upvotes}}
+    <a href="#/posts/{{posts.indexOf(post)}}">Comments</a>
+  </div>
